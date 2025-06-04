@@ -1,0 +1,52 @@
+.not-found-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f0f2f5; /* 使用一个柔和的背景色 */
+  color: #555; /* 默认文字颜色 */
+  font-family: sans-serif; /* 使用常见的字体 */
+}
+
+.not-found-content {
+  text-align: center;
+  padding: 40px;
+  background-color: #fff; /* 白色内容区域背景 */
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  font-size: 120px; /* 醒目的 404 字体大小 */
+  color: #348ac7; /* 与管理系统主题色协调 */
+  margin-bottom: 10px;
+}
+
+h2 {
+  font-size: 24px;
+  color: #333; /* 标题颜色 */
+  margin-bottom: 20px;
+}
+
+p {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.home-button {
+  display: inline-block;
+  padding: 10px 20px;
+  margin-top: 20px;
+  background-color: #348ac7; /* 按钮背景色与主题色协调 */
+  color: white; /* 按钮文字颜色 */
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  text-decoration: none; /* 移除下划线 */
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #7474bf; /* 悬停效果 */
+  }
+}
