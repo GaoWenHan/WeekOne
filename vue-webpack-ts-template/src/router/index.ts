@@ -38,13 +38,4 @@ const routes = createRouter({
 })
 
 
-// const index = import ('@/views/viewRevenue/index.vue')
-
-// routes.addRoute('layout',{
-//   path: 'viewRevenue',
-//   name: '查看流水',
-//   component:index
-// })
-
-
 export default routes

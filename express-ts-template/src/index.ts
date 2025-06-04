@@ -1,5 +1,7 @@
 import express from 'express';
 import path from 'path';
+import cors from 'cors';
+
 import { AppDataSource } from './config/database';
 
 const app = express();
@@ -12,6 +14,10 @@ AppDataSource.initialize()
   .catch(err => console.error('Database connection error', err))
 
 // Middleware
+app.use(cors({
+  origin: 'http://localhost:8080',
+  credentials: true
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use((req, res, next) => {

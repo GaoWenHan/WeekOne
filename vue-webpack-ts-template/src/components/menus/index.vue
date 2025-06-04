@@ -1,56 +1,49 @@
 <script lang="ts" setup>
   import {
-    Document,
-    Menu as IconMenu,
-    Location,
-    Setting,
-  } from '@element-plus/icons-vue'
+  List,
+  Location,
+  Setting,
+  Document,
+  Menu as IconMenu,
+} from '@element-plus/icons-vue'
+import { computed } from 'vue'
+const iconMap: Record<'List' | 'Location' | 'Setting' | 'Document' | 'IconMenu', any> = {
+  List,
+  Location,
+  Setting,
+  Document,
+  IconMenu,
+}
+type IconKey = 'List' | 'Location' | 'Setting' | 'Document' | 'IconMenu'
+import { useUserStore } from '@/stores/user'
+const userStore = useUserStore()
+
+const menuRoutes = computed(() => userStore.routes.filter(r => r.showInMenu))
   const handleOpen = (key: string, keyPath: string[]) => {
-    console.log(key, keyPath)
-  }
-  const handleClose = (key: string, keyPath: string[]) => {
-    console.log(key, keyPath)
-  }
+  console.log('open', key, keyPath)
+}
+const handleClose = (key: string, keyPath: string[]) => {
+  console.log('close', key, keyPath)
+}
 </script>
 
 <template>
-  <div>
-    <el-menu default-active="2" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose">
-      <el-sub-menu index="1">
-        <template #title>
-          <el-icon>
-            <location />
-          </el-icon>
-          <span>Navigator One</span>
-        </template>
-        <el-menu-item-group title="Group One">
-          <el-menu-item index="1-1">item one</el-menu-item>
-          <el-menu-item index="1-2">item two</el-menu-item>
-        </el-menu-item-group>
-        <el-menu-item-group title="Group Two">
-          <el-menu-item index="1-3">item three</el-menu-item>
-        </el-menu-item-group>
-        <el-sub-menu index="1-4">
-          <template #title>item four</template>
-          <el-menu-item index="1-4-1">item one</el-menu-item>
-        </el-sub-menu>
-      </el-sub-menu>
-      <el-menu-item index="2">
-        <el-icon><icon-menu /></el-icon>
-        <span>Navigator Two</span>
-      </el-menu-item>
-      <el-menu-item index="3" disabled>
-        <el-icon>
-          <document />
-        </el-icon>
-        <span>Navigator Three</span>
-      </el-menu-item>
-      <el-menu-item index="4">
-        <el-icon>
-          <setting />
-        </el-icon>
-        <span>Navigator Four</span>
-      </el-menu-item>
-    </el-menu>
-  </div>
+  <el-menu
+    default-active="someActiveIndex"
+    class="el-menu-vertical-demo"
+    @open="handleOpen"
+    @close="handleClose"
+  >
+    <el-menu-item
+      v-for="item in menuRoutes"
+      :key="item.path"
+      :index="item.path"
+    >
+      <el-icon v-if="item.icon && iconMap[item.icon as IconKey]">
+  <component :is="iconMap[item.icon as IconKey]" />
+</el-icon>
+
+      <span>{{ item.name }}</span>
+    </el-menu-item>
+  </el-menu>
 </template>
